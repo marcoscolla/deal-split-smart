@@ -109,7 +109,7 @@ function Index() {
       <div className="mx-auto max-w-2xl">
         <header className="mb-8">
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Cálculo de Comissões Imobiliárias
+            Cálculo de Comissões
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Simulação em tempo real do rateio de comissões.
