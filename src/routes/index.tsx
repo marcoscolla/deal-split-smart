@@ -100,7 +100,8 @@ function Index() {
     const net = base - referral;
     const angariacao = angOn ? net * (angPct / 100) : 0;
     const venda = venOn ? net * (venPct / 100) : 0;
-    return { base, referral, net, angariacao, venda };
+    const total = angariacao + venda;
+    return { base, referral, net, angariacao, venda, total };
   }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct]);
 
   return (
@@ -194,6 +195,16 @@ function Index() {
                   </div>
                   <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
                     {brl(calc.venda)}
+                  </div>
+                </div>
+              )}
+              {(angOn || venOn) && (
+                <div className="rounded-xl border border-accent bg-accent/10 p-5">
+                  <div className="text-xs font-medium uppercase tracking-wider text-accent-foreground">
+                    Total a receber
+                  </div>
+                  <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                    {brl(calc.total)}
                   </div>
                 </div>
               )}
