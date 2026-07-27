@@ -15,6 +15,8 @@ const parseCurrency = (s: string) => {
   return parseInt(digits, 10) / 100;
 };
 
+const fmtPct = (n: number) => n.toString().replace(".", ",");
+
 function CurrencyInput({ value, onChange }: { value: number; onChange: (n: number) => void }) {
   return (
     <input
@@ -87,22 +89,38 @@ function Row({ label, value, muted }: { label: string; value: string; muted?: bo
 function Index() {
   const [propertyValue, setPropertyValue] = useState(1_000_000);
   const [grossPct, setGrossPct] = useState(3.0);
+  const [royOn, setRoyOn] = useState(true);
+  const [royPct, setRoyPct] = useState(10.0);
+  const [parOn, setParOn] = useState(false);
+  const [parPct, setParPct] = useState(12.5);
   const [refOn, setRefOn] = useState(false);
-  const [refPct, setRefPct] = useState(12.5);
+  const [refPct, setRefPct] = useState(10.0);
   const [angOn, setAngOn] = useState(true);
   const [angPct, setAngPct] = useState(45.0);
   const [venOn, setVenOn] = useState(true);
   const [venPct, setVenPct] = useState(45.0);
+  const [franquiaPct, setFranquiaPct] = useState(50.0);
 
   const calc = useMemo(() => {
     const base = propertyValue * (grossPct / 100);
+    const royalties = royOn ? base * (royPct / 100) : 0;
+    const parceria = parOn ? base * (parPct / 100) : 0;
     const referral = refOn ? base * (refPct / 100) : 0;
-    const net = base - referral;
-    const angariacao = angOn ? net * (angPct / 100) : 0;
-    const venda = venOn ? net * (venPct / 100) : 0;
-    const total = angariacao + venda;
-    return { base, referral, net, angariacao, venda, total };
-  }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct]);
+    const net = base - royalties - parceria - referral;
+    const franquia = net * (franquiaPct / 100);
+    const imobiliaria = net * ((100 - franquiaPct) / 100);
+    const angariacao = angOn ? imobiliaria * (angPct / 100) : 0;
+    const venda = venOn ? imobiliaria * (venPct / 100) : 0;
+    return { base, royalties, parceria, referral, net, franquia, imobiliaria, angariacao, venda };
+  }, [propertyValue, grossPct, royOn, royPct, parOn, parPct, refOn, refPct, angOn, angPct, venOn, venPct, franquiaPct]);
+
+  const rateio = [
+    { label: "Royalties", on: royOn, setOn: setRoyOn, pct: royPct, setPct: setRoyPct },
+    { label: "Parceria", on: parOn, setOn: setParOn, pct: parPct, setPct: setParPct },
+    { label: "Referenciamento", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
+    { label: "Angariação", on: angOn, setOn: setAngOn, pct: angPct, setPct: setAngPct },
+    { label: "Venda", on: venOn, setOn: setVenOn, pct: venPct, setPct: setVenPct },
+  ];
 
   return (
     <div className="min-h-screen bg-background px-4 py-10 sm:py-16">
@@ -117,7 +135,6 @@ function Index() {
         </header>
 
         <div className="space-y-4">
-          {/* Property + Gross */}
           <section className="rounded-2xl bg-surface p-6 space-y-5">
             <div>
               <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -136,17 +153,12 @@ function Index() {
             </div>
           </section>
 
-          {/* Rateio */}
           <section className="rounded-2xl bg-surface p-6">
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Configurações de rateio
             </h2>
             <div className="divide-y divide-border">
-              {[
-                { label: "Referenciamento", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
-                { label: "Angariação", on: angOn, setOn: setAngOn, pct: angPct, setPct: setAngPct },
-                { label: "Venda", on: venOn, setOn: setVenOn, pct: venPct, setPct: setVenPct },
-              ].map((r) => (
+              {rateio.map((r) => (
                 <div key={r.label} className="flex items-center justify-between py-3">
                   <label className="flex cursor-pointer items-center gap-3">
                     <Checkbox checked={r.on} onChange={r.setOn} />
@@ -157,31 +169,76 @@ function Index() {
                   <PercentInput value={r.pct} onChange={r.setPct} disabled={!r.on} />
                 </div>
               ))}
+              <div className="flex items-center justify-between py-3">
+                <span className="text-sm text-foreground">Franquia</span>
+                <PercentInput value={franquiaPct} onChange={setFranquiaPct} />
+              </div>
             </div>
           </section>
 
-          {/* Resultados */}
           <section className="rounded-2xl bg-surface p-6">
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Resumo dos valores
             </h2>
             <div className="divide-y divide-border">
               <Row label="Comissão base total" value={brl(calc.base)} muted />
+              {royOn && (
+                <Row label={`Royalties (${fmtPct(royPct)}%)`} value={`- ${brl(calc.royalties)}`} muted />
+              )}
+              {parOn && (
+                <Row label={`Parceria (${fmtPct(parPct)}%)`} value={`- ${brl(calc.parceria)}`} muted />
+              )}
               {refOn && (
-                <Row
-                  label={`Referenciamento (${refPct.toString().replace(".", ",")}%)`}
-                  value={`- ${brl(calc.referral)}`}
-                  muted
-                />
+                <Row label={`Referenciamento (${fmtPct(refPct)}%)`} value={`- ${brl(calc.referral)}`} muted />
               )}
               <Row label="Base líquida" value={brl(calc.net)} muted />
             </div>
 
             <div className="mt-5 space-y-3">
+              {royOn && (
+                <div className="rounded-xl border border-border bg-surface-2 p-5">
+                  <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Royalties ({fmtPct(royPct)}%)
+                  </div>
+                  <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                    {brl(calc.royalties)}
+                  </div>
+                </div>
+              )}
+              {parOn && (
+                <div className="rounded-xl border border-border bg-surface-2 p-5">
+                  <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Parceria ({fmtPct(parPct)}%)
+                  </div>
+                  <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                    {brl(calc.parceria)}
+                  </div>
+                </div>
+              )}
+              <div className="rounded-xl border border-border bg-surface-2 p-5">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Franquia ({fmtPct(franquiaPct)}%)
+                    </div>
+                    <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                      {brl(calc.franquia)}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Imobiliária ({fmtPct(100 - franquiaPct)}%)
+                    </div>
+                    <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                      {brl(calc.imobiliaria)}
+                    </div>
+                  </div>
+                </div>
+              </div>
               {angOn && (
                 <div className="rounded-xl border border-border bg-surface-2 p-5">
                   <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Angariação ({angPct.toString().replace(".", ",")}%)
+                    Angariação ({fmtPct(angPct)}%)
                   </div>
                   <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
                     {brl(calc.angariacao)}
@@ -191,20 +248,10 @@ function Index() {
               {venOn && (
                 <div className="rounded-xl border border-border bg-surface-2 p-5">
                   <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Venda ({venPct.toString().replace(".", ",")}%)
+                    Venda ({fmtPct(venPct)}%)
                   </div>
                   <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
                     {brl(calc.venda)}
-                  </div>
-                </div>
-              )}
-              {(angOn || venOn) && (
-                <div className="rounded-xl border border-accent bg-accent/10 p-5">
-                  <div className="text-xs font-medium uppercase tracking-wider text-accent-foreground">
-                    Total a receber
-                  </div>
-                  <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                    {brl(calc.total)}
                   </div>
                 </div>
               )}
