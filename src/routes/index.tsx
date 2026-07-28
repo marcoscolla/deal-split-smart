@@ -120,7 +120,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background px-4 py-10 sm:py-16">
       <div className="mx-auto max-w-2xl">
-        <header className="mb-8">
+        <header className="mb-8 text-center">
           <div className="mb-4">
             <img src="/LOGOREMAX07.png" alt="RE/MAX" className="w-full object-contain" />
           </div>
