@@ -103,10 +103,13 @@ function Index() {
     const referral = refOn ? base * (refPct / 100) : 0;
     const net = base - referral;
     const franquia = net * (franquiaPct / 100);
-    const imobiliaria = net * (imobiliariaPct / 100);
-    const angariacao = angOn ? imobiliaria * (angPct / 100) : 0;
-    const venda = venOn ? imobiliaria * (venPct / 100) : 0;
+    // compute initial imobiliaria to calculate angariação and venda
+    const initialImobiliaria = net * (imobiliariaPct / 100);
+    const angariacao = angOn ? initialImobiliaria * (angPct / 100) : 0;
+    const venda = venOn ? initialImobiliaria * (venPct / 100) : 0;
     const partnerTotal = angariacao + venda;
+    // Imobiliária é a base líquida menos o valor do parceiro
+    const imobiliaria = net - partnerTotal;
     return { base, referral, net, franquia, imobiliaria, angariacao, venda, partnerTotal };
   }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
 
@@ -217,7 +220,7 @@ function Index() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Parceiro ({fmtPct(franquiaPct)}%)
+                      Parceiro
                     </div>
                     <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
                       {brl(calc.partnerTotal)}
