@@ -163,7 +163,7 @@ function Index() {
                 </div>
               ))}
               <div className="flex items-center justify-between py-3 gap-3">
-                <span className="text-sm text-foreground">Franquia / Imobiliária</span>
+                <span className="text-sm text-foreground">Parceiro / Imobiliária</span>
                 <div className="flex items-center gap-2">
                   <PercentInput
                     value={franquiaPct}
@@ -192,26 +192,6 @@ function Index() {
             </div>
 
             <div className="mt-5 space-y-3">
-              <div className="rounded-xl border border-border bg-surface-2 p-5">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Franquia ({fmtPct(franquiaPct)}%)
-                    </div>
-                    <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl(calc.franquia)}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Imobiliária ({fmtPct(imobiliariaPct)}%)
-                    </div>
-                    <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl(calc.imobiliaria)}
-                    </div>
-                  </div>
-                </div>
-              </div>
               {angOn && (
                 <div className="rounded-xl border border-border bg-surface-2 p-5">
                   <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -232,6 +212,26 @@ function Index() {
                   </div>
                 </div>
               )}
+              <div className="rounded-xl border border-border bg-surface-2 p-5">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Parceiro ({fmtPct(franquiaPct)}%)
+                    </div>
+                    <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                      {brl(calc.franquia)}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Imobiliária ({fmtPct(imobiliariaPct)}%)
+                    </div>
+                    <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                      {brl(calc.imobiliaria)}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         </div>
