@@ -217,10 +217,10 @@ function Index() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Parceiro ({fmtPct(franquiaPct)}%)
+                      Parceiro (Total)
                     </div>
                     <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl(calc.partnerTotal)}
+                      {brl(calc.angariacao + calc.venda)}
                     </div>
                   </div>
                   <div>
