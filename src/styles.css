@@ -23,7 +23,6 @@
 :root {
   --radius: 0.75rem;
   --background: oklch(0.17 0.008 260);
-  --background: #000e35;
   --foreground: oklch(0.96 0.005 260);
   --surface: oklch(0.21 0.009 260);
   --surface-2: oklch(0.235 0.01 260);
