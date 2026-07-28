@@ -103,7 +103,9 @@ function Index() {
     const referral = refOn ? base * (refPct / 100) : 0;
     const net = base - referral;
     const franquia = net * (franquiaPct / 100);
+    
     const imobiliaria = net * (imobiliariaPct / 100);
+    
     const angariacao = angOn ? franquia * (angPct / 100) : 0;
     const venda = venOn ? franquia * (venPct / 100) : 0;
     return { base, referral, net, franquia, imobiliaria, angariacao, venda };
