@@ -125,7 +125,7 @@ function Index() {
             Cálculo de Comissões
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Simulação em tempo real do rateio de comissões.
+            Simulação do rateio de comissões.
           </p>
         </header>
 
