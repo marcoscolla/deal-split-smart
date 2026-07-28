@@ -121,8 +121,8 @@ function Index() {
     <div className="min-h-screen bg-background px-4 py-10 sm:py-16">
       <div className="mx-auto max-w-2xl">
         <header className="mb-8">
-          <div className="flex justify-center mb-4">
-            <img src="/REMAX_03.png" alt="RE/MAX" className="h-12 object-contain" />
+          <div className="mb-4">
+            <img src="/REMAX_03.png" alt="RE/MAX" className="w-full object-contain" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Cálculo de Comissões
