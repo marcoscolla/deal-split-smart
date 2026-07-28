@@ -1,53 +1,40 @@
 ## Objetivo
-Ampliar as regras de cálculo com Royalties e Parceria (descontados da comissão bruta), introduzir um split editável Franquia/Imobiliária (padrão 50/50) e reorganizar os cards de resultado.
+Remover as regras de Royalties e Parceria e permitir configurar tanto o percentual da Franquia quanto o da Imobiliária (com sincronia entre si, somando 100%).
 
 ## Alterações em `src/routes/index.tsx`
 
 ### Estado
-- Adicionar `royOn=true`, `royPct=10.0`.
-- Adicionar `parOn=false`, `parPct=12.5`.
-- Adicionar `franquiaPct=50.0` (editável, aplicado sempre — sem checkbox).
-- Manter `refOn/refPct` (Referenciamento) inalterados.
+- Remover: `royOn`, `royPct`, `parOn`, `parPct`.
+- Manter: `refOn/refPct`, `angOn/angPct`, `venOn/venPct`, `franquiaPct`.
+- Adicionar: `imobiliariaPct` (padrão 50.0), sincronizado com `franquiaPct` (sempre soma 100).
 
 ### Configurações de rateio (ordem)
-1. Royalties (novo)
-2. Parceria (novo)
-3. Referenciamento (existente)
-4. Angariação (existente)
-5. Venda (existente)
+1. Referenciamento
+2. Angariação
+3. Venda
 
-Adicionar, abaixo da lista, uma linha extra "Franquia" com apenas o `PercentInput` (sem checkbox) para editar o split.
+Abaixo da lista, uma linha com dois `PercentInput` lado a lado: **Franquia** e **Imobiliária**. Editar um recalcula o outro (`imobiliaria = 100 - franquia`).
 
-### Fórmulas (`useMemo`)
+### Fórmulas
 ```text
 base           = propertyValue * grossPct%
-royalties      = royOn ? base * royPct%      : 0
-parceria       = parOn ? base * parPct%      : 0
-referenciamento= refOn ? base * refPct%      : 0
-net            = base - royalties - parceria - referenciamento
+referenciamento= refOn ? base * refPct% : 0
+net            = base - referenciamento
 franquia       = net * franquiaPct%
-imobiliaria    = net * (100 - franquiaPct)%
+imobiliaria    = net * imobiliariaPct%
 angariacao     = angOn ? imobiliaria * angPct% : 0
 venda          = venOn ? imobiliaria * venPct% : 0
 ```
 
-### Resumo dos valores (linhas mudas)
+### Resumo dos valores
 - Comissão base total
-- Royalties (se ativo) — negativo
-- Parceria (se ativo) — negativo
 - Referenciamento (se ativo) — negativo
 - Base líquida
 
-### Cards de destaque (nesta ordem)
-1. **Royalties** (se `royOn`) — mostra `royPct%` e valor
-2. **Parceria** (se `parOn`) — mostra `parPct%` e valor
-3. **Franquia / Imobiliária** — card único mostrando os dois valores lado a lado, com o `franquiaPct%` aplicado
-4. **Angariação** (se `angOn`) — valor sobre a base da Imobiliária
-5. **Venda** (se `venOn`) — valor sobre a base da Imobiliária
-
-Remover o card "Total a receber".
+### Cards de destaque
+1. Franquia / Imobiliária (card único com ambos os percentuais dinâmicos)
+2. Angariação (se ativo)
+3. Venda (se ativo)
 
 ## Validação
-- Conferir no preview a nova ordem e os novos cards.
-- Verificar que ao desativar Royalties/Parceria os valores voltam a compor a base líquida.
-- Ajustar o percentual da Franquia e confirmar que Angariação/Venda recalculam sobre os 50% restantes (Imobiliária).
+Verificar no preview que ao alterar Franquia para 60%, Imobiliária vira 40% automaticamente, e Angariação/Venda recalculam sobre o novo valor da Imobiliária.
