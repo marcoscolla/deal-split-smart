@@ -122,7 +122,7 @@ function Index() {
       <div className="mx-auto max-w-2xl">
         <header className="mb-8">
           <div className="mb-4">
-            <img src="/REMAX_03.png" alt="RE/MAX" className="w-full object-contain" />
+            <img src="/LOGOREMAX07.png" alt="RE/MAX" className="w-full object-contain" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Cálculo de Comissões
