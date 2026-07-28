@@ -88,7 +88,7 @@ function Row({ label, value, muted }: { label: string; value: string; muted?: bo
 
 function Index() {
   const [propertyValue, setPropertyValue] = useState(1_000_000);
-  const [grossPct, setGrossPct] = useState(3.0);
+  const [grossPct, setGrossPct] = useState(6.0);
   const [refOn, setRefOn] = useState(false);
   const [refPct, setRefPct] = useState(10.0);
   const [angOn, setAngOn] = useState(true);
@@ -221,9 +221,13 @@ function Index() {
                       Parceiro
                     </div>
                     <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl(calc.franquia)}
+                      {brl(calc.angariacao + calc.venda)}
                     </div>
                   </div>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface-2 p-5">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                       Imobiliária
