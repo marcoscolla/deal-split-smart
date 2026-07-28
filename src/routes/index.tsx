@@ -236,7 +236,7 @@ function Index() {
                       Imobiliária
                     </div>
                     <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl((calc.net) - calc.angariacao + calc.venda)}
+                      {brl((calc.imobiliaria + calc.franquia ) - (calc.angariacao + calc.venda))}
                     </div>
                   </div>
                 </div>
