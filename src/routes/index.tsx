@@ -95,20 +95,20 @@ function Index() {
   const [angPct, setAngPct] = useState(45.0);
   const [venOn, setVenOn] = useState(true);
   const [venPct, setVenPct] = useState(45.0);
-  const [franquiaPct, setFranquiaPct] = useState(50.0);
-  const imobiliariaPct = 100 - franquiaPct;
+  const [parceiroPct, setparceiroPct] = useState(50.0);
+  const imobiliariaPct = 100 - parceiroPct;
 
   const calc = useMemo(() => {
     const base = propertyValue * (grossPct / 100);
     const referral = refOn ? base * (refPct / 100) : 0;
     const net = base - referral;
-    const franquia = net * (franquiaPct / 100);
+    const parceiro = net * (parceiroPct / 100);
     const imobiliaria = net * (imobiliariaPct / 100);
-    const angariacao = angOn ? imobiliaria * (angPct / 100) : 0;
-    const venda = venOn ? imobiliaria * (venPct / 100) : 0;
+    const angariacao = angOn ? parceiro * (angPct / 100) : 0;
+    const venda = venOn ? parceiro * (venPct / 100) : 0;
     const partnerTotal = angariacao + venda;
-    return { base, referral, net, franquia, imobiliaria, angariacao, venda, partnerTotal };
-  }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
+    return { base, referral, net, parceiro, imobiliaria, angariacao, venda, partnerTotal };
+  }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct, parceiroPct, imobiliariaPct]);
 
   const rateio = [
     { label: "Referenciamento", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
@@ -167,13 +167,13 @@ function Index() {
                 <span className="text-sm text-foreground">Parceiro / Imobiliária</span>
                 <div className="flex items-center gap-2">
                   <PercentInput
-                    value={franquiaPct}
-                    onChange={(n) => setFranquiaPct(Math.max(0, Math.min(100, n)))}
+                    value={parceiroPct}
+                    onChange={(n) => setparceiroPct(Math.max(0, Math.min(100, n)))}
                   />
                   <span className="text-xs text-muted-foreground">/</span>
                   <PercentInput
                     value={imobiliariaPct}
-                    onChange={(n) => setFranquiaPct(Math.max(0, Math.min(100, 100 - n)))}
+                    onChange={(n) => setparceiroPct(Math.max(0, Math.min(100, 100 - n)))}
                   />
                 </div>
               </div>
