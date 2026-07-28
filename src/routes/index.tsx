@@ -88,27 +88,26 @@ function Row({ label, value, muted }: { label: string; value: string; muted?: bo
 
 function Index() {
   const [propertyValue, setPropertyValue] = useState(1_000_000);
-  const [grossPct, setGrossPct] = useState(6.0);
+  const [grossPct, setGrossPct] = useState(3.0);
   const [refOn, setRefOn] = useState(false);
   const [refPct, setRefPct] = useState(10.0);
   const [angOn, setAngOn] = useState(true);
   const [angPct, setAngPct] = useState(45.0);
   const [venOn, setVenOn] = useState(true);
   const [venPct, setVenPct] = useState(45.0);
-  const [parceiroPct, setparceiroPct] = useState(50.0);
-  const imobiliariaPct = 100 - parceiroPct;
+  const [franquiaPct, setFranquiaPct] = useState(50.0);
+  const imobiliariaPct = 100 - franquiaPct;
 
   const calc = useMemo(() => {
     const base = propertyValue * (grossPct / 100);
     const referral = refOn ? base * (refPct / 100) : 0;
     const net = base - referral;
-    const parceiro = net * (parceiroPct / 100);
+    const franquia = net * (franquiaPct / 100);
     const imobiliaria = net * (imobiliariaPct / 100);
-    const angariacao = angOn ? parceiro * (angPct / 100) : 0;
-    const venda = venOn ? parceiro * (venPct / 100) : 0;
-    const partnerTotal = angariacao + venda;
-    return { base, referral, net, parceiro, imobiliaria, angariacao, venda, partnerTotal };
-  }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct, parceiroPct, imobiliariaPct]);
+    const angariacao = angOn ? franquia * (angPct / 100) : 0;
+    const venda = venOn ? franquia * (venPct / 100) : 0;
+    return { base, referral, net, franquia, imobiliaria, angariacao, venda };
+  }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
 
   const rateio = [
     { label: "Referenciamento", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
@@ -167,13 +166,13 @@ function Index() {
                 <span className="text-sm text-foreground">Parceiro / Imobiliária</span>
                 <div className="flex items-center gap-2">
                   <PercentInput
-                    value={parceiroPct}
-                    onChange={(n) => setparceiroPct(Math.max(0, Math.min(100, n)))}
+                    value={franquiaPct}
+                    onChange={(n) => setFranquiaPct(Math.max(0, Math.min(100, n)))}
                   />
                   <span className="text-xs text-muted-foreground">/</span>
                   <PercentInput
                     value={imobiliariaPct}
-                    onChange={(n) => setparceiroPct(Math.max(0, Math.min(100, 100 - n)))}
+                    onChange={(n) => setFranquiaPct(Math.max(0, Math.min(100, 100 - n)))}
                   />
                 </div>
               </div>
@@ -217,18 +216,18 @@ function Index() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Parceiro
+                      Parceiro ({fmtPct(franquiaPct)}%)
                     </div>
                     <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl(calc.angariacao + calc.venda)}
+                      {brl(calc.franquia)}
                     </div>
                   </div>
                   <div>
                     <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Imobiliária
+                      Imobiliária ({fmtPct(imobiliariaPct)}%)
                     </div>
                     <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl(calc.net - calc.venda - calc.angariacao)}
+                      {brl(calc.imobiliaria)}
                     </div>
                   </div>
                 </div>
