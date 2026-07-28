@@ -106,7 +106,8 @@ function Index() {
     const imobiliaria = net * (imobiliariaPct / 100);
     const angariacao = angOn ? imobiliaria * (angPct / 100) : 0;
     const venda = venOn ? imobiliaria * (venPct / 100) : 0;
-    return { base, referral, net, franquia, imobiliaria, angariacao, venda };
+    const partnerTotal = angariacao + venda;
+    return { base, referral, net, franquia, imobiliaria, angariacao, venda, partnerTotal };
   }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
 
   const rateio = [
@@ -219,7 +220,7 @@ function Index() {
                       Parceiro ({fmtPct(franquiaPct)}%)
                     </div>
                     <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                      {brl(calc.franquia)}
+                      {brl(calc.partnerTotal)}
                     </div>
                   </div>
                   <div>
