@@ -92,7 +92,7 @@ function Index() {
   const [refOn, setRefOn] = useState(false);
   const [refPct, setRefPct] = useState(10.0);
   const [parOn, setParOn] = useState(false);
-  const [parPct, setParPct] = useState(12.5);
+  const [parPct, setParPct] = useState(50.0);
   const [angOn, setAngOn] = useState(true);
   const [angPct, setAngPct] = useState(45.0);
   const [venOn, setVenOn] = useState(true);
