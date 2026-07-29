@@ -215,29 +215,30 @@ function Index() {
                     {brl(calc.parceria)}
                   </div>
                 </div>
-              )}
-              {angOn && (
-                <div className="rounded-xl border border-border bg-surface-2 p-5">
-                  <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Angariação ({fmtPct(angPct)}%)
-                  </div>
-                  <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                    {brl(calc.angariacao)}
-                  </div>
-                </div>
-              )}
-              {venOn && (
-                <div className="rounded-xl border border-border bg-surface-2 p-5">
-                  <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Venda ({fmtPct(venPct)}%)
-                  </div>
-                  <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
-                    {brl(calc.venda)}
-                  </div>
-                </div>
-              )}
+              )}              
               {(angOn || venOn) && (
                 <div className="rounded-xl border border-border bg-surface-2 p-5">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Venda ({fmtPct(venPct)}%)
+                      </div>
+                      <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                        {brl(calc.venda)}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Angariação ({fmtPct(angPct)}%)
+                      </div>
+                      <div className="mt-1 text-2xl font-bold tabular-nums text-accent transition-all duration-150">
+                        {brl(calc.angariacao)}
+                      </div>
+                    </div>
+                  
+                  </div>
+                  
+                  
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
