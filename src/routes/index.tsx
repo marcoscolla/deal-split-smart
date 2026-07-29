@@ -116,7 +116,7 @@ function Index() {
   }, [propertyValue, grossPct, refOn, refPct, parOn, parPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
 
   const rateio = [
-    { label: "Referenciamento", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
+    { label: "Ajuste", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
     { label: "Parceria", on: parOn, setOn: setParOn, pct: parPct, setPct: setParPct },
     { label: "Angariação", on: angOn, setOn: setAngOn, pct: angPct, setPct: setAngPct },
     { label: "Venda", on: venOn, setOn: setVenOn, pct: venPct, setPct: setVenPct },
@@ -197,7 +197,7 @@ function Index() {
             <div className="divide-y divide-border">
               <Row label="Comissão base total" value={brl(calc.base)} muted />
               {refOn && (
-                <Row label={`Referenciamento (${fmtPct(refPct)}%)`} value={`- ${brl(calc.referral)}`} muted />
+                <Row label={`Ajuste (${fmtPct(refPct)}%)`} value={`- ${brl(calc.referral)}`} muted />
               )}
               {parOn && (
                 <Row label={`Parceria (${fmtPct(parPct)}%)`} value={`- ${brl(calc.parceria)}`} muted />
