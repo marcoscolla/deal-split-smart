@@ -238,10 +238,11 @@ function Index() {
                     </div>
                   
                   </div>
-                  <p></p>
+                  
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
+                      <p></p>
                       <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                         COOPERADO
                       </div>
