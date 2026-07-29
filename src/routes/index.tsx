@@ -91,6 +91,8 @@ function Index() {
   const [grossPct, setGrossPct] = useState(6.0);
   const [refOn, setRefOn] = useState(false);
   const [refPct, setRefPct] = useState(10.0);
+  const [parOn, setParOn] = useState(false);
+  const [parPct, setParPct] = useState(12.5);
   const [angOn, setAngOn] = useState(true);
   const [angPct, setAngPct] = useState(45.0);
   const [venOn, setVenOn] = useState(true);
@@ -101,21 +103,25 @@ function Index() {
   const calc = useMemo(() => {
     const base = propertyValue * (grossPct / 100);
     const referral = refOn ? base * (refPct / 100) : 0;
-    const net = base - referral;
+    const afterRef = base - referral;
+    const parceria = parOn ? afterRef * (parPct / 100) : 0;
+    const net = afterRef - parceria;
     const franquia = net * (franquiaPct / 100);
-    
+
     const imobiliaria = net * (imobiliariaPct / 100);
-    
+
     const angariacao = angOn ? franquia * (angPct / 100) : 0;
     const venda = venOn ? franquia * (venPct / 100) : 0;
-    return { base, referral, net, franquia, imobiliaria, angariacao, venda };
-  }, [propertyValue, grossPct, refOn, refPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
+    return { base, referral, parceria, net, franquia, imobiliaria, angariacao, venda };
+  }, [propertyValue, grossPct, refOn, refPct, parOn, parPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
 
   const rateio = [
     { label: "Referenciamento", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
+    { label: "Parceria", on: parOn, setOn: setParOn, pct: parPct, setPct: setParPct },
     { label: "Angariação", on: angOn, setOn: setAngOn, pct: angPct, setPct: setAngPct },
     { label: "Venda", on: venOn, setOn: setVenOn, pct: venPct, setPct: setVenPct },
   ];
+
 
   return (
     <div className="min-h-screen bg-background px-4 py-10 sm:py-16">
