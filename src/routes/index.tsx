@@ -218,7 +218,7 @@ function Index() {
               )}              
               {(angOn || venOn) && (
                 <div className="rounded-xl border border-border bg-surface-2 p-5">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     <div>
                       <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                         Venda ({fmtPct(venPct)}%)
