@@ -227,7 +227,7 @@ function Index() {
                         {brl(calc.venda)}
                       </div>
                     </div>
-                    <p></p>
+                    
                     <div>
                       <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                         Angariação ({fmtPct(angPct)}%)
@@ -238,7 +238,7 @@ function Index() {
                     </div>
                   
                   </div>
-                  
+                  <p></p>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
