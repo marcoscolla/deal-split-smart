@@ -133,7 +133,7 @@ function Index() {
       lines.push(`Total cooperado (angariação + venda): ${brl(calc.angariacao + calc.venda)}`);
     lines.push(``);
     lines.push(
-      `Saldo imobiliária: ${brl(calc.imobiliaria + calc.franquia - (calc.angariacao + calc.venda))}`,
+      `Total Imobiliária: ${brl(calc.imobiliaria + calc.franquia - (calc.angariacao + calc.venda))}`,
     );
     return lines.join("\n");
   };
@@ -333,14 +333,14 @@ function Index() {
                 onClick={() => copy("imob")}
                 className="rounded-lg border border-border bg-surface-2 px-4 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
-                {copied === "imob" ? "Copiado!" : "Copiar resumo — Imobiliária"}
+                {copied === "imob" ? "Copiado!" : "Imobiliária"}
               </button>
               <button
                 type="button"
                 onClick={() => copy("corretor")}
                 className="rounded-lg border border-border bg-surface-2 px-4 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
-                {copied === "corretor" ? "Copiado!" : "Copiar resumo — Corretor"}
+                {copied === "corretor" ? "Copiado!" : "Corretor"}
               </button>
             </div>
           </section>
