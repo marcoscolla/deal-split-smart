@@ -320,6 +320,23 @@ function Index() {
                 </div>
               </div>
             </div>
+
+            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => copy("imob")}
+                className="rounded-lg border border-border bg-surface-2 px-4 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+              >
+                {copied === "imob" ? "Copiado!" : "Copiar resumo — Imobiliária"}
+              </button>
+              <button
+                type="button"
+                onClick={() => copy("corretor")}
+                className="rounded-lg border border-border bg-surface-2 px-4 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+              >
+                {copied === "corretor" ? "Copiado!" : "Copiar resumo — Corretor"}
+              </button>
+            </div>
           </section>
         </div>
       </div>
