@@ -150,9 +150,10 @@ function Index() {
     }
   }, []);
 
-  // write to localStorage after initial load whenever any config changes
+  // write to localStorage after initial load whenever any config changes (debounced)
   useEffect(() => {
     if (!loaded) return;
+
     const toSave = {
       propertyValue,
       grossPct,
@@ -166,11 +167,16 @@ function Index() {
       venPct,
       franquiaPct,
     };
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-    } catch (e) {
-      console.warn("Failed to save settings to localStorage", e);
-    }
+
+    const id = window.setTimeout(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+      } catch (e) {
+        console.warn("Failed to save settings to localStorage", e);
+      }
+    }, 500);
+
+    return () => clearTimeout(id);
   }, [loaded, propertyValue, grossPct, refOn, refPct, parOn, parPct, angOn, angPct, venOn, venPct, franquiaPct]);
 
   const calc = useMemo(() => {
