@@ -340,7 +340,7 @@ function Index() {
               <button
                 type="button"
                 onClick={() => copy("corretor")}
-                disabled={(angOn && venOn)}
+                disabled={(!angOn && !venOn)}
                 className="rounded-lg border border-border bg-surface-2 px-4 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 {copied === "corretor" ? "Copiado!" : "Corretor"}
