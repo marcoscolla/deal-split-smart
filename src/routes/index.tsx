@@ -120,16 +120,19 @@ function Index() {
   const buildImobiliariaText = () => {
     const lines = [
       `Valor do imóvel: ${brl(propertyValue)}`,
-      `Comissão base total (${fmtPct(grossPct)}%): ${brl(calc.base)}`,
+      `Comissão base (${fmtPct(grossPct)}%): ${brl(calc.base)}`,
     ];
+    lines.push(``);
     if (refOn) lines.push(`Ajuste (${fmtPct(refPct)}%): - ${brl(calc.referral)}`);
     if (parOn) lines.push(`Parceria (${fmtPct(parPct)}%): - ${brl(calc.parceria)}`);
     lines.push(`Base líquida: ${brl(calc.net)}`);
-    lines.push(`Divisão Parceiro / Imobiliária: ${fmtPct(franquiaPct)}% / ${fmtPct(imobiliariaPct)}%`);
+    lines.push(``);
+    lines.push(`Divisão Cooperado (${fmtPct(franquiaPct)}%) / Imobiliária (${fmtPct(imobiliariaPct)}%)`);
     if (angOn) lines.push(`Angariação (${fmtPct(angPct)}%): ${brl(calc.angariacao)}`);
     if (venOn) lines.push(`Venda (${fmtPct(venPct)}%): ${brl(calc.venda)}`);
     if (angOn || venOn)
       lines.push(`Total cooperado (angariação + venda): ${brl(calc.angariacao + calc.venda)}`);
+    lines.push(``);
     lines.push(
       `Saldo imobiliária: ${brl(calc.imobiliaria + calc.franquia - (calc.angariacao + calc.venda))}`,
     );
@@ -139,13 +142,18 @@ function Index() {
   const buildCorretorText = () => {
     const lines = [
       `Valor do imóvel: ${brl(propertyValue)}`,
-      `Comissão base total (${fmtPct(grossPct)}%): ${brl(calc.base)}`,
+      `Comissão base (${fmtPct(grossPct)}%): ${brl(calc.base)}`,
     ];
+    lines.push(``);
     if (refOn) lines.push(`Ajuste (${fmtPct(refPct)}%): - ${brl(calc.referral)}`);
-    lines.push(`Divisão Parceiro / Imobiliária: ${fmtPct(franquiaPct)}% / ${fmtPct(imobiliariaPct)}%`);
+    if (parOn) lines.push(`Parceria (${fmtPct(parPct)}%): - ${brl(calc.parceria)}`);
+    lines.push(`Base líquida: ${brl(calc.net)}`);
+    lines.push(``);
+    lines.push(`Divisão Cooperado (${fmtPct(franquiaPct)}%) / Imobiliária (${fmtPct(imobiliariaPct)}%)`);
     if (angOn) lines.push(`Angariação (${fmtPct(angPct)}%): ${brl(calc.angariacao)}`);
     if (venOn) lines.push(`Venda (${fmtPct(venPct)}%): ${brl(calc.venda)}`);
     if (angOn || venOn)
+      lines.push(``);
       lines.push(`Total (angariação + venda): ${brl(calc.angariacao + calc.venda)}`);
     return lines.join("\n");
   };
