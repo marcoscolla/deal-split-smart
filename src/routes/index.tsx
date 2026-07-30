@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState, type ChangeEvent } from "react";
+import { useMemo, useState, useEffect, type ChangeEvent } from "react";
 import { Check } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -87,18 +87,91 @@ function Row({ label, value, muted }: { label: string; value: string; muted?: bo
 }
 
 function Index() {
-  const [propertyValue, setPropertyValue] = useState(1_000_000);
-  const [grossPct, setGrossPct] = useState(6.0);
-  const [refOn, setRefOn] = useState(false);
-  const [refPct, setRefPct] = useState(10.0);
-  const [parOn, setParOn] = useState(false);
-  const [parPct, setParPct] = useState(50.0);
-  const [angOn, setAngOn] = useState(true);
-  const [angPct, setAngPct] = useState(45.0);
-  const [venOn, setVenOn] = useState(true);
-  const [venPct, setVenPct] = useState(45.0);
-  const [franquiaPct, setFranquiaPct] = useState(50.0);
+  // defaults
+  const defaults = {
+    propertyValue: 1_000_000,
+    grossPct: 6.0,
+    refOn: false,
+    refPct: 10.0,
+    parOn: false,
+    parPct: 50.0,
+    angOn: true,
+    angPct: 45.0,
+    venOn: true,
+    venPct: 45.0,
+    franquiaPct: 50.0,
+  } as const;
+
+  const STORAGE_KEY = "remax-comissoes-v1";
+
+  const [propertyValue, setPropertyValue] = useState<number>(defaults.propertyValue);
+  const [grossPct, setGrossPct] = useState<number>(defaults.grossPct);
+  const [refOn, setRefOn] = useState<boolean>(defaults.refOn);
+  const [refPct, setRefPct] = useState<number>(defaults.refPct);
+  const [parOn, setParOn] = useState<boolean>(defaults.parOn);
+  const [parPct, setParPct] = useState<number>(defaults.parPct);
+  const [angOn, setAngOn] = useState<boolean>(defaults.angOn);
+  const [angPct, setAngPct] = useState<number>(defaults.angPct);
+  const [venOn, setVenOn] = useState<boolean>(defaults.venOn);
+  const [venPct, setVenPct] = useState<number>(defaults.venPct);
+  const [franquiaPct, setFranquiaPct] = useState<number>(defaults.franquiaPct);
   const imobiliariaPct = 100 - franquiaPct;
+
+  const [loaded, setLoaded] = useState(false);
+
+  // read from localStorage on mount and merge with defaults
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        setLoaded(true);
+        return;
+      }
+      const parsed = JSON.parse(raw);
+      // merge with defaults, validating types
+      if (parsed && typeof parsed === "object") {
+        if (typeof parsed.propertyValue === "number") setPropertyValue(parsed.propertyValue);
+        if (typeof parsed.grossPct === "number") setGrossPct(parsed.grossPct);
+        if (typeof parsed.refOn === "boolean") setRefOn(parsed.refOn);
+        if (typeof parsed.refPct === "number") setRefPct(parsed.refPct);
+        if (typeof parsed.parOn === "boolean") setParOn(parsed.parOn);
+        if (typeof parsed.parPct === "number") setParPct(parsed.parPct);
+        if (typeof parsed.angOn === "boolean") setAngOn(parsed.angOn);
+        if (typeof parsed.angPct === "number") setAngPct(parsed.angPct);
+        if (typeof parsed.venOn === "boolean") setVenOn(parsed.venOn);
+        if (typeof parsed.venPct === "number") setVenPct(parsed.venPct);
+        if (typeof parsed.franquiaPct === "number") setFranquiaPct(parsed.franquiaPct);
+      }
+    } catch (e) {
+      // corrupted data, ignore and use defaults
+      console.warn("Failed to parse saved settings, using defaults", e);
+    } finally {
+      setLoaded(true);
+    }
+  }, []);
+
+  // write to localStorage after initial load whenever any config changes
+  useEffect(() => {
+    if (!loaded) return;
+    const toSave = {
+      propertyValue,
+      grossPct,
+      refOn,
+      refPct,
+      parOn,
+      parPct,
+      angOn,
+      angPct,
+      venOn,
+      venPct,
+      franquiaPct,
+    };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    } catch (e) {
+      console.warn("Failed to save settings to localStorage", e);
+    }
+  }, [loaded, propertyValue, grossPct, refOn, refPct, parOn, parPct, angOn, angPct, venOn, venPct, franquiaPct]);
 
   const calc = useMemo(() => {
     const base = propertyValue * (grossPct / 100);
@@ -147,7 +220,7 @@ function Index() {
     lines.push(``);
     if (refOn) lines.push(`Ajuste (${fmtPct(refPct)}%): - ${brl(calc.referral)}`);
     if (parOn) lines.push(`Parceria (${fmtPct(parPct)}%): - ${brl(calc.parceria)}`);
-    if (refOn || parOn) {lines.push(`Base líquida: ${brl(calc.net)}`); lines.push(``);}
+    if (refOn || parOn) {lines.push(`Base líquida: ${brl(calc.net)}`); lines.push(``);}    
     lines.push(`Divisão: Cooperado (${fmtPct(franquiaPct)}%) / Imobiliária (${fmtPct(imobiliariaPct)}%)`);
     lines.push(``);
     if (angOn) lines.push(`Angariação (${fmtPct(angPct)}%): ${brl(calc.angariacao)}`);
@@ -183,6 +256,26 @@ function Index() {
     { label: "Venda", on: venOn, setOn: setVenOn, pct: venPct, setPct: setVenPct },
   ];
 
+  const restoreDefaults = () => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {
+      console.warn("Failed to remove settings from localStorage", e);
+    }
+    setPropertyValue(defaults.propertyValue);
+    setGrossPct(defaults.grossPct);
+    setRefOn(defaults.refOn);
+    setRefPct(defaults.refPct);
+    setParOn(defaults.parOn);
+    setParPct(defaults.parPct);
+    setAngOn(defaults.angOn);
+    setAngPct(defaults.angPct);
+    setVenOn(defaults.venOn);
+    setVenPct(defaults.venPct);
+    setFranquiaPct(defaults.franquiaPct);
+    // keep loaded true so changes will be saved
+    setLoaded(true);
+  };
 
   return (
     <div className="min-h-screen bg-background px-4 py-10 sm:py-16">
@@ -248,6 +341,16 @@ function Index() {
                   />
                 </div>
               </div>
+            </div>
+
+            <div className="mt-4 text-right">
+              <button
+                type="button"
+                onClick={restoreDefaults}
+                className="text-xs text-muted-foreground hover:underline"
+              >
+                Restaurar padrões
+              </button>
             </div>
           </section>
 
