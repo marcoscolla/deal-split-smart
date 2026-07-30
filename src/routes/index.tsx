@@ -115,6 +115,59 @@ function Index() {
     return { base, referral, parceria, net, franquia, imobiliaria, angariacao, venda };
   }, [propertyValue, grossPct, refOn, refPct, parOn, parPct, angOn, angPct, venOn, venPct, franquiaPct, imobiliariaPct]);
 
+  const [copied, setCopied] = useState<null | "imob" | "corretor">(null);
+
+  const buildImobiliariaText = () => {
+    const lines = [
+      `Valor do imóvel: ${brl(propertyValue)}`,
+      `Comissão base total (${fmtPct(grossPct)}%): ${brl(calc.base)}`,
+    ];
+    if (refOn) lines.push(`Ajuste (${fmtPct(refPct)}%): - ${brl(calc.referral)}`);
+    if (parOn) lines.push(`Parceria (${fmtPct(parPct)}%): - ${brl(calc.parceria)}`);
+    lines.push(`Base líquida: ${brl(calc.net)}`);
+    lines.push(`Divisão Parceiro / Imobiliária: ${fmtPct(franquiaPct)}% / ${fmtPct(imobiliariaPct)}%`);
+    if (angOn) lines.push(`Angariação (${fmtPct(angPct)}%): ${brl(calc.angariacao)}`);
+    if (venOn) lines.push(`Venda (${fmtPct(venPct)}%): ${brl(calc.venda)}`);
+    if (angOn || venOn)
+      lines.push(`Total cooperado (angariação + venda): ${brl(calc.angariacao + calc.venda)}`);
+    lines.push(
+      `Saldo imobiliária: ${brl(calc.imobiliaria + calc.franquia - (calc.angariacao + calc.venda))}`,
+    );
+    return lines.join("\n");
+  };
+
+  const buildCorretorText = () => {
+    const lines = [
+      `Valor do imóvel: ${brl(propertyValue)}`,
+      `Comissão base total (${fmtPct(grossPct)}%): ${brl(calc.base)}`,
+    ];
+    if (refOn) lines.push(`Ajuste (${fmtPct(refPct)}%): - ${brl(calc.referral)}`);
+    lines.push(`Divisão Parceiro / Imobiliária: ${fmtPct(franquiaPct)}% / ${fmtPct(imobiliariaPct)}%`);
+    if (angOn) lines.push(`Angariação (${fmtPct(angPct)}%): ${brl(calc.angariacao)}`);
+    if (venOn) lines.push(`Venda (${fmtPct(venPct)}%): ${brl(calc.venda)}`);
+    if (angOn || venOn)
+      lines.push(`Total (angariação + venda): ${brl(calc.angariacao + calc.venda)}`);
+    return lines.join("\n");
+  };
+
+  const copy = async (kind: "imob" | "corretor") => {
+    const text = kind === "imob" ? buildImobiliariaText() : buildCorretorText();
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    setCopied(kind);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
   const rateio = [
     { label: "Ajuste", on: refOn, setOn: setRefOn, pct: refPct, setPct: setRefPct },
     { label: "Parceria", on: parOn, setOn: setParOn, pct: parPct, setPct: setParPct },
