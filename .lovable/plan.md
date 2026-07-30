@@ -1,44 +1,48 @@
 ## Objetivo
-Reintroduzir a regra de **Parceria** como item configurável, abaixo de Referenciamento, e ajustar a exibição do card Total.
 
-## Alterações em `src/routes/index.tsx`
+Adicionar dois botões que copiam o resumo do cálculo em texto para a área de transferência: um com a visão da **Imobiliária** e outro com a visão do **Corretor/Cooperado**.
 
-### Estado
-- Adicionar `parOn` (padrão: desmarcado) e `parPct` (padrão 12,5%).
+## Onde
 
-### Configurações de rateio (ordem)
-1. Referenciamento (checkbox + %)
-2. **Parceria** (checkbox + %) — novo
-3. Angariação
-4. Venda
-5. Parceiro / Imobiliária (dois percentuais sincronizados em 100%)
+Nova seção de ações no fim do bloco "Resumo dos valores" em `src/routes/index.tsx`, com dois botões lado a lado:
+- "Copiar resumo — Imobiliária"
+- "Copiar resumo — Corretor"
 
-### Fórmulas
+Ao clicar, o texto vai para a área de transferência e o botão mostra "Copiado!" por ~2s.
+
+## Conteúdo dos textos
+
+Imobiliária (resumo completo):
 ```text
-base            = valorImovel * comissaoBruta%
-referenciamento = refOn ? base * refPct% : 0
-apósRef         = base - referenciamento
-parceria        = parOn ? apósRef * parPct% : 0
-baseLiquida     = apósRef - parceria
-parceiro        = baseLiquida * parceiroPct%
-imobiliaria     = baseLiquida * imobiliariaPct%
-angariacao      = angOn ? ... (mesma base atual) : 0
-venda           = venOn ? ... (mesma base atual) : 0
+Valor do imóvel: R$ 1.000.000,00
+Comissão base total (6%): R$ 60.000,00
+Ajuste (10%): - R$ 6.000,00
+Parceria (50%): - R$ 27.000,00
+Base líquida: R$ 27.000,00
+Divisão Parceiro / Imobiliária: 50% / 50%
+Angariação (45%): R$ 6.075,00
+Venda (45%): R$ 6.075,00
+Total cooperado (angariação + venda): R$ 12.150,00
+Saldo imobiliária: R$ 14.850,00
 ```
-A Parceria incide sobre o valor já descontado do Referenciamento.
 
-### Resumo dos valores
-- Comissão base total
-- Referenciamento (se ativo) — negativo
-- **Parceria (se ativo) — negativo**
-- Base líquida
+Corretor/Cooperado:
+```text
+Valor do imóvel: R$ 1.000.000,00
+Comissão base total (6%): R$ 60.000,00
+Ajuste (10%): - R$ 6.000,00
+Divisão Parceiro / Imobiliária: 50% / 50%
+Angariação (45%): R$ 6.075,00
+Venda (45%): R$ 6.075,00
+Total (angariação + venda): R$ 12.150,00
+```
 
-### Cards
-1. **Parceria** (só se ativo) — acima do card de Angariação
-2. Angariação (se ativo)
-3. Venda (se ativo)
-4. **Total** — exibido **somente se** Angariação ou Venda estiver marcado
-5. Parceiro / Imobiliária (mantido, em duas colunas, após Venda/Total)
+Regras: linhas de Ajuste, Parceria, Angariação e Venda só aparecem quando a respectiva opção estiver marcada. A linha de divisão Parceiro / Imobiliária aparece nos dois resumos, refletindo os percentuais configurados. Valores usam a mesma formatação BRL/percentual já existente na tela.
 
-## Validação
-Conferir no preview: ativar Referenciamento 10% e Parceria 12,5% e verificar que a Parceria usa a base já líquida do referenciamento; desmarcar Angariação e Venda e confirmar que o card Total desaparece.
+## Detalhes técnicos
+
+- Reaproveita `calc`, `brl` e `fmtPct` existentes; nenhuma mudança na lógica de cálculo.
+- Duas funções puras `buildImobiliariaText()` / `buildCorretorText()` no mesmo arquivo, montando as linhas condicionalmente.
+- Cópia via `navigator.clipboard.writeText`, com fallback para `document.execCommand('copy')` em navegadores sem permissão.
+- Feedback de estado com `useState` (qual botão foi copiado) e `setTimeout` para resetar.
+- Estilo dos botões seguindo o tema escuro atual (borda `border`, fundo `surface-2`, hover com `accent`).
