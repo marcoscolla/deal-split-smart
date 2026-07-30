@@ -174,7 +174,7 @@ function Index() {
       } catch (e) {
         console.warn("Failed to save settings to localStorage", e);
       }
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(id);
   }, [loaded, propertyValue, grossPct, refOn, refPct, parOn, parPct, angOn, angPct, venOn, venPct, franquiaPct]);
