@@ -205,15 +205,16 @@ function Index() {
     if (refOn) lines.push(`Ajuste (${fmtPct(refPct)}%): - ${brl(calc.referral)}`);
     if (parOn) lines.push(`Parceria (${fmtPct(parPct)}%): - ${brl(calc.parceria)}`);
     if (refOn || parOn) {lines.push(`Base líquida: ${brl(calc.net)}`); lines.push(``);}
-    lines.push(`Divisão: Cooperado (${fmtPct(franquiaPct)}%) / Imobiliária (${fmtPct(imobiliariaPct)}%)`);
-    lines.push(``);  
+    if (angOn || venOn) {
+      lines.push(`Divisão: Cooperado (${fmtPct(franquiaPct)}%) / Imobiliária (${fmtPct(imobiliariaPct)}%)`);
+      lines.push(``); 
+    }
     if (angOn) lines.push(`Angariação (${fmtPct(angPct)}%): ${brl(calc.angariacao)}`);
     if (venOn) lines.push(`Venda (${fmtPct(venPct)}%): ${brl(calc.venda)}`);
     if (angOn || venOn)
       lines.push(`Total cooperado (angariação + venda): ${brl(calc.angariacao + calc.venda)}`);
     lines.push(``);
-    lines.push(
-      `Total Imobiliária: ${brl(calc.imobiliaria + calc.franquia - (calc.angariacao + calc.venda))}`,
+    lines.push(`Total Imobiliária: ${brl(calc.imobiliaria + calc.franquia - (calc.angariacao + calc.venda))}`,
     );
     return lines.join("\n");
   };
@@ -227,8 +228,10 @@ function Index() {
     if (refOn) lines.push(`Ajuste (${fmtPct(refPct)}%): - ${brl(calc.referral)}`);
     if (parOn) lines.push(`Parceria (${fmtPct(parPct)}%): - ${brl(calc.parceria)}`);
     if (refOn || parOn) {lines.push(`Base líquida: ${brl(calc.net)}`); lines.push(``);}    
-    lines.push(`Divisão: Cooperado (${fmtPct(franquiaPct)}%) / Imobiliária (${fmtPct(imobiliariaPct)}%)`);
-    lines.push(``);
+    if (angOn || venOn) {
+      lines.push(`Divisão: Cooperado (${fmtPct(franquiaPct)}%) / Imobiliária (${fmtPct(imobiliariaPct)}%)`);
+      lines.push(``);
+    }
     if (angOn) lines.push(`Angariação (${fmtPct(angPct)}%): ${brl(calc.angariacao)}`);
     if (venOn) lines.push(`Venda (${fmtPct(venPct)}%): ${brl(calc.venda)}`);
     if (angOn || venOn)
