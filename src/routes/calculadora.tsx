@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState, useEffect, type ChangeEvent } from "react";
 import { Check } from "lucide-react";
 
@@ -302,7 +302,9 @@ function Calculadora() {
       <div className="mx-auto max-w-2xl">
         <header className="mb-8 text-center">
           <div className="mb-4">
-            <img src="/LOGOREMAX07.png" alt="RE/MAX" className="w-full object-contain" />
+            <Link to="/" className="inline-block">
+              <img src="/LOGOREMAX07.png" alt="RE/MAX" className="w-full object-contain" />
+            </Link>
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Cálculo de Comissões
@@ -468,6 +470,15 @@ function Calculadora() {
               >
                 {copied === "corretor" ? "Copiado!" : "Corretor"}
               </button>
+            </div>
+
+            <div className="mt-3 text-center">
+              <Link
+                to="/"
+                className="inline-block w-full rounded-lg border border-border bg-surface-2 px-4 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+              >
+                Voltar para início
+              </Link>
             </div>
           </section>
         </div>
