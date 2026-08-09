@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState, useEffect, type ChangeEvent } from "react";
 import { Check } from "lucide-react";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/calculadora")({
   component: Index,
 });
 
