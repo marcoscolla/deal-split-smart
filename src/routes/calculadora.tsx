@@ -3,7 +3,18 @@ import { useMemo, useState, useEffect, type ChangeEvent } from "react";
 import { Check } from "lucide-react";
 
 export const Route = createFileRoute("/calculadora")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Calculadora de Comissões" },
+      { name: "description", content: "Simule o rateio de comissões imobiliárias com ajuste, parceria, angariação e venda." },
+      { property: "og:title", content: "Calculadora de Comissões" },
+      { property: "og:description", content: "Simule o rateio de comissões imobiliárias com ajuste, parceria, angariação e venda." },
+    ],
+    links: [
+      { rel: "canonical", href: "https://terracapitalcalc.lovable.app/calculadora" },
+    ],
+  }),
+  component: Calculadora,
 });
 
 const brl = (n: number) =>
