@@ -1,48 +1,43 @@
+# Landing page com acesso à calculadora
+
 ## Objetivo
+Criar uma landing page em `/` que mantenha o logo e a paleta de cores atuais e contenha um botão que leva o usuário à calculadora, que será movida para `/calculadora`.
 
-Adicionar dois botões que copiam o resumo do cálculo em texto para a área de transferência: um com a visão da **Imobiliária** e outro com a visão do **Corretor/Cooperado**.
+## Alterações propostas
 
-## Onde
+### 1. Mover a calculadora para `/calculadora`
+- Renomear o arquivo `src/routes/index.tsx` para `src/routes/calculadora.tsx`.
+- Atualizar o `createFileRoute("/")` para `createFileRoute("/calculadora")`.
+- O conteúdo e o estado da calculadora permanecem inalterados.
 
-Nova seção de ações no fim do bloco "Resumo dos valores" em `src/routes/index.tsx`, com dois botões lado a lado:
-- "Copiar resumo — Imobiliária"
-- "Copiar resumo — Corretor"
+### 2. Criar landing page em `/`
+- Criar um novo `src/routes/index.tsx`.
+- Componente com a mesma estrutura visual centralizada e fundo `bg-background`.
+- Exibir o logo `LOGOREMAX07.png` no topo, igual ao da calculadora.
+- Título: "Cálculo de Comissões".
+- Subtítulo breve explicando o propósito da ferramenta.
+- Botão de CTA: "Abrir calculadora" usando `<Link to="/calculadora">` do TanStack Router, com estilo primário (usando o token `--accent` para manter a identidade visual).
 
-Ao clicar, o texto vai para a área de transferência e o botão mostra "Copiado!" por ~2s.
+### 3. Metadados SEO
+- A landing page `/` terá seu próprio `head()` com title, description, og:title e og:description.
+- A calculadora `/calculadora` também terá seus próprios metadados distintos.
+- Não alterar o `og:image` de `__root.tsx` a menos que seja gerada uma nova imagem específica.
 
-## Conteúdo dos textos
+### 4. Estilo
+- Manter os tokens CSS existentes em `src/styles.css` (sem alterações).
+- Usar as mesmas classes de superfície (`bg-surface`, `rounded-2xl`, etc.) para manter coerência visual.
 
-Imobiliária (resumo completo):
+## Estrutura de rotas esperada
 ```text
-Valor do imóvel: R$ 1.000.000,00
-Comissão base total (6%): R$ 60.000,00
-Ajuste (10%): - R$ 6.000,00
-Parceria (50%): - R$ 27.000,00
-Base líquida: R$ 27.000,00
-Divisão Parceiro / Imobiliária: 50% / 50%
-Angariação (45%): R$ 6.075,00
-Venda (45%): R$ 6.075,00
-Total cooperado (angariação + venda): R$ 12.150,00
-Saldo imobiliária: R$ 14.850,00
+src/routes/
+  __root.tsx        -> layout/shell global
+  index.tsx         -> /     (landing page)
+  calculadora.tsx   -> /calculadora (calculadora existente)
 ```
 
-Corretor/Cooperado:
-```text
-Valor do imóvel: R$ 1.000.000,00
-Comissão base total (6%): R$ 60.000,00
-Ajuste (10%): - R$ 6.000,00
-Divisão Parceiro / Imobiliária: 50% / 50%
-Angariação (45%): R$ 6.075,00
-Venda (45%): R$ 6.075,00
-Total (angariação + venda): R$ 12.150,00
-```
-
-Regras: linhas de Ajuste, Parceria, Angariação e Venda só aparecem quando a respectiva opção estiver marcada. A linha de divisão Parceiro / Imobiliária aparece nos dois resumos, refletindo os percentuais configurados. Valores usam a mesma formatação BRL/percentual já existente na tela.
-
-## Detalhes técnicos
-
-- Reaproveita `calc`, `brl` e `fmtPct` existentes; nenhuma mudança na lógica de cálculo.
-- Duas funções puras `buildImobiliariaText()` / `buildCorretorText()` no mesmo arquivo, montando as linhas condicionalmente.
-- Cópia via `navigator.clipboard.writeText`, com fallback para `document.execCommand('copy')` em navegadores sem permissão.
-- Feedback de estado com `useState` (qual botão foi copiado) e `setTimeout` para resetar.
-- Estilo dos botões seguindo o tema escuro atual (borda `border`, fundo `surface-2`, hover com `accent`).
+## Critérios de aceitação
+- A URL `/` exibe a landing page com o logo e o botão "Abrir calculadora".
+- Clicar no botão navega para `/calculadora` sem recarregar a página.
+- A `/calculadora` funciona exatamente como a calculadora atual.
+- O build do TanStack Router gera corretamente a árvore de rotas.
+- Nenhuma funcionalidade da calculadora é perdida ou alterada.
