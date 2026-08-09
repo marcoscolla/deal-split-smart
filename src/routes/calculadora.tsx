@@ -86,7 +86,7 @@ function Row({ label, value, muted }: { label: string; value: string; muted?: bo
   );
 }
 
-function Index() {
+function Calculadora() {
   // defaults
   const defaults = {
     propertyValue: 1_000_000,
