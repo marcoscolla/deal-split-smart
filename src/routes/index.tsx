@@ -30,6 +30,7 @@ function LandingPage() {
             <div className="rounded-2xl bg-surface p-5 text-left">
               <h2 className="text-lg font-semibold text-foreground">Agendar horário com Patricia</h2>
               <p className="mt-2 text-sm text-muted-foreground">Agendar ACM, Primeira Visita, Reuniões.</p>
+              <br></br>
               <a
                 href="https://calendar.app.google/1dJqDSYVx6FrMH8E8"
                 target=""
@@ -43,6 +44,7 @@ function LandingPage() {
             <div className="rounded-2xl bg-surface p-5 text-left">
               <h2 className="text-lg font-semibold text-foreground">Agendar horário Sala Reunião I</h2>
               <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião I.</p>
+              <br></br>
               <a
                 href="https://calendar.app.google/DkzGyEYxnqBsDrkM6"
                 target=""
@@ -56,6 +58,7 @@ function LandingPage() {
             <div className="rounded-2xl bg-surface p-5 text-left">
               <h2 className="text-lg font-semibold text-foreground">Agendar horário Sala Reunião II</h2>
               <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião II.</p>
+              <br></br>
               <a
                 href="https://calendar.app.google/Vzu5WW7Hc2gaYw8dA"
                 target=""
