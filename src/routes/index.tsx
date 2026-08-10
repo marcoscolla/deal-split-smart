@@ -34,7 +34,7 @@ function LandingPage() {
                 href="https://calendar.app.google/1dJqDSYVx6FrMH8E8"
                 target=""
                 rel=""
-                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:border-accent hover:text-accent"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
               >
                 Agendar
               </a>
@@ -47,7 +47,7 @@ function LandingPage() {
                 href="https://calendar.app.google/DkzGyEYxnqBsDrkM6"
                 target=""
                 rel=""
-                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:border-accent hover:text-accent"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
               >
                 Agendar
               </a>
@@ -57,10 +57,10 @@ function LandingPage() {
               <h2 className="text-lg font-semibold text-foreground">Agendar horário Sala Reunião II</h2>
               <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião II.</p>
               <a
-                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0DbeHqmUZR9mujGA22kHFUbAt8XAJ16qfRExsIDUz2V2DDB6hIMJnx5xERXbxxD_Y3v22D3RMW"
+                href="https://calendar.google.com/appointments/schedules/AcZssZ1Ioa9ClfjktPRKSQi0_d3Sy1CzyKrXrp752EWPDFVJWJxsoR-tBHb190kvOWxEIGHxH6wuuozv"
                 target=""
                 rel=""
-                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:border-accent hover:text-accent"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
               >
                 Agendar
               </a>
