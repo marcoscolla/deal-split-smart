@@ -57,7 +57,7 @@ function LandingPage() {
               <h2 className="text-lg font-semibold text-foreground">Agendar horário Sala Reunião II</h2>
               <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião II.</p>
               <a
-                href="https://calendar.app.google/Mozrb3JuCKabehjP7"
+                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0DbeHqmUZR9mujGA22kHFUbAt8XAJ16qfRExsIDUz2V2DDB6hIMJnx5xERXbxxD_Y3v22D3RMW"
                 target="_blank"
                 rel=""
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
