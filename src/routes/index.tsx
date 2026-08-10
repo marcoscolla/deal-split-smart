@@ -21,7 +21,7 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-background px-4 py-10 sm:py-16">
       <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-        <div className="mb-8 w-full max-w-xs">
+        <div className="mb-8 w-full">
           <img src="/LOGOREMAX07.png" alt="RE/MAX" className="w-full object-contain" />
         </div>
 
@@ -33,7 +33,7 @@ function LandingPage() {
               <a
                 href="https://calendar.app.google/1dJqDSYVx6FrMH8E8"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 Agendar
@@ -46,7 +46,7 @@ function LandingPage() {
               <a
                 href="https://calendar.app.google/DkzGyEYxnqBsDrkM6"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 Agendar
@@ -59,7 +59,7 @@ function LandingPage() {
               <a
                 href="https://calendar.app.google/mQvrkVBfZCJaiPPU7"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 Agendar
@@ -79,17 +79,13 @@ function LandingPage() {
             <div className="mt-8">
               <Link
                 to="/calculadora"
-                className="inline-flex items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
               >
                 Abrir calculadora
               </Link>
             </div>
           </div>
         </div>
-
-        <p className="mt-6 text-xs text-muted-foreground">
-          Clique no botão acima para acessar a calculadora.
-        </p>
       </div>
     </div>
   );
