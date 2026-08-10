@@ -43,7 +43,7 @@ function LandingPage() {
             </div>
 
             <div className="rounded-2xl bg-surface p-5 text-left">
-              <h2 className="text-lg font-semibold text-foreground">Agendar horário Sala Reunião I</h2>
+              <h2 className="text-lg font-semibold text-foreground">Sala Reunião I</h2>
               <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião I.</p>
               <div className="mt-8">
                 <a
@@ -58,7 +58,7 @@ function LandingPage() {
             </div>
 
             <div className="rounded-2xl bg-surface p-5 text-left">
-              <h2 className="text-lg font-semibold text-foreground">Agendar horário Sala Reunião II</h2>
+              <h2 className="text-lg font-semibold text-foreground">Sala Reunião II</h2>
               <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião II.</p>
               <div className="mt-8">
                 <a
