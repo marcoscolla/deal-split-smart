@@ -27,7 +27,7 @@ function LandingPage() {
 
         <div className="w-full space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-1">
-            <div className="rounded-2xl bg-surface p-5 text-left">
+            <div className="rounded-2xl bg-surface p-5 text-center">
               <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Agenda Patricia</h1>
               <p className="mt-4 text-sm text-muted-foreground">Agendar ACM, Primeira Visita, Reuniões.</p>
               <div className="mt-8">
@@ -42,7 +42,7 @@ function LandingPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-surface p-5 text-left">
+            <div className="rounded-2xl bg-surface p-5 text-center">
               <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Sala Reunião I</h1>
               <p className="mt-4 text-sm text-muted-foreground">Agendar horários na sala de reunião I.</p>
               <div className="mt-8">
@@ -57,7 +57,7 @@ function LandingPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-surface p-5 text-left">
+            <div className="rounded-2xl bg-surface p-5 text-center">
               <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Sala Reunião II</h1>
               <p className="mt-4 text-sm text-muted-foreground">Agendar horários na sala de reunião II.</p>
               <div className="mt-8">
