@@ -3,10 +3,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cálculo de Comissões Imobiliárias" },
-      { name: "description", content: "Calcule o rateio de comissões imobiliárias de forma simples e rápida: ajuste, parceria, angariação e venda." },
-      { property: "og:title", content: "Cálculo de Comissões Imobiliárias" },
-      { property: "og:description", content: "Calcule o rateio de comissões imobiliárias de forma simples e rápida: ajuste, parceria, angariação e venda." },
+      { title: "REMAX Terra Capital" },
+      { name: "description", content: "REMAX Terra Capital" },
+      { property: "og:title", content: "REMAX Terra Capital" },
+      { property: "og:description", content: "REMAX Terra Capital" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
