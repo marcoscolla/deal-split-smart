@@ -34,7 +34,7 @@ function LandingPage() {
                 href="https://calendar.app.google/1dJqDSYVx6FrMH8E8"
                 target=""
                 rel=""
-                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
               >
                 Agendar
               </a>
@@ -47,7 +47,7 @@ function LandingPage() {
                 href="https://calendar.app.google/DkzGyEYxnqBsDrkM6"
                 target=""
                 rel=""
-                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
               >
                 Agendar
               </a>
@@ -60,7 +60,7 @@ function LandingPage() {
                 href="https://calendar.google.com/appointments/schedules/AcZssZ1Ioa9ClfjktPRKSQi0_d3Sy1CzyKrXrp752EWPDFVJWJxsoR-tBHb190kvOWxEIGHxH6wuuozv"
                 target=""
                 rel=""
-                className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-accent px-4 py-2.5 text-sm font-medium background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-accent px-8 py-4 text-base font-semibold text-background transition hover:bg-accent-active focus:outline-none focus:ring-2 focus:ring-accent/20"
               >
                 Agendar
               </a>
