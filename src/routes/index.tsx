@@ -28,8 +28,8 @@ function LandingPage() {
         <div className="w-full space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div className="rounded-2xl bg-surface p-5 text-left">
-              <h2 className="text-lg font-semibold text-foreground">Agendar horário com Patricia</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Agendar ACM, Primeira Visita, Reuniões.</p>
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Agendar horário com Patricia</h1>
+              <p className="mt-4 text-sm text-muted-foreground">Agendar ACM, Primeira Visita, Reuniões.</p>
               <div className="mt-8">
                 <a
                   href="https://calendar.app.google/1dJqDSYVx6FrMH8E8"
@@ -43,8 +43,8 @@ function LandingPage() {
             </div>
 
             <div className="rounded-2xl bg-surface p-5 text-left">
-              <h2 className="text-lg font-semibold text-foreground">Sala Reunião I</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião I.</p>
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Sala Reunião I</h1>
+              <p className="mt-4 text-sm text-muted-foreground">Agendar horários na sala de reunião I.</p>
               <div className="mt-8">
                 <a
                   href="https://calendar.app.google/DkzGyEYxnqBsDrkM6"
@@ -58,8 +58,8 @@ function LandingPage() {
             </div>
 
             <div className="rounded-2xl bg-surface p-5 text-left">
-              <h2 className="text-lg font-semibold text-foreground">Sala Reunião II</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Agendar horários na sala de reunião II.</p>
+              <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Sala Reunião II</h1>
+              <p className="mt-4 text-sm text-muted-foreground">Agendar horários na sala de reunião II.</p>
               <div className="mt-8">
                 <a
                   href="https://calendar.app.google/Vzu5WW7Hc2gaYw8dA"
