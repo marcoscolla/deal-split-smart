@@ -22,7 +22,7 @@ function LandingPage() {
     <div className="min-h-screen bg-background px-4 py-10 sm:py-16">
       <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
         <div className="mb-8 w-full max-w-xs">
-          <img src="/LOGOREMAX07.png" alt="RE/MAX" className="mx-auto h-auto max-h-24 w-auto object-contain" />
+          <img src="/LOGOREMAX07.png" alt="RE/MAX" className="mx-auto h-auto w-24 object-contain" />
         </div>
 
         <div className="w-full space-y-4">
