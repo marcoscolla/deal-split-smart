@@ -303,7 +303,7 @@ function Calculadora() {
         <header className="mb-8 text-center">
           <div className="mb-4">
             <Link to="/" className="inline-block">
-              <img src="/LOGOREMAX07.png" alt="RE/MAX" className="w-full object-contain" />
+              <img src="/LOGOREMAX07.png" alt="RE/MAX" className="mx-auto h-auto w-24 object-contain" />
             </Link>
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
