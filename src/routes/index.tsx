@@ -33,7 +33,7 @@ function LandingPage() {
               <a
                 href="https://calendar.app.google/1dJqDSYVx6FrMH8E8"
                 target="_blank"
-                rel="noopener"
+                rel=""
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 Agendar
@@ -46,7 +46,7 @@ function LandingPage() {
               <a
                 href="https://calendar.app.google/DkzGyEYxnqBsDrkM6"
                 target="_blank"
-                rel="noopener"
+                rel=""
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 Agendar
@@ -59,7 +59,7 @@ function LandingPage() {
               <a
                 href="https://calendar.app.google/mQvrkVBfZCJaiPPU7"
                 target="_blank"
-                rel="noopener"
+                rel=""
                 className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-border bg-surface-2 px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 Agendar
