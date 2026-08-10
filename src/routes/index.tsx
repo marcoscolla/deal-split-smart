@@ -26,7 +26,7 @@ function LandingPage() {
         </div>
 
         <div className="w-full space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-1">
             <div className="rounded-2xl bg-surface p-5 text-left">
               <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Agendar horário com Patricia</h1>
               <p className="mt-4 text-sm text-muted-foreground">Agendar ACM, Primeira Visita, Reuniões.</p>
